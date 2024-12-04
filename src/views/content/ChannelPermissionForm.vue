@@ -8,7 +8,7 @@ import { queryChannel } from '@/api/content';
 import LabelTip from '@/components/LabelTip.vue';
 
 defineOptions({
-  name: 'RolePermissionForm',
+  name: 'ChannelPermissionForm',
 });
 const props = defineProps({ modelValue: { type: Boolean, required: true }, beanId: { type: String, default: null } });
 const emit = defineEmits({ 'update:modelValue': null, finished: null });

@@ -941,8 +941,10 @@ const invalidExtension = (extensions: string) => {
 <style lang="scss" scoped>
 .el-tabs {
   :deep(.el-tabs__header) {
-    float: right;
     margin-right: 1px;
+  }
+  :deep(.el-tabs__content) {
+    flex-grow: 0;
   }
 }
 </style>

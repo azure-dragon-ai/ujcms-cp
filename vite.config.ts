@@ -15,6 +15,13 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         '@/': `${resolve(__dirname, 'src')}/`,
       },
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
     server: {
       port: Number(env.VITE_PORT),
       proxy: {

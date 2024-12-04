@@ -63,7 +63,7 @@ const dataKey = computed<any>({
       { label: '文件上传', type: 'fileUpload' },
 -->
 <template>
-  <el-input v-if="field.type === 'text'" v-model="data" :placeholder="field.placeholder"></el-input>
+  <el-input v-if="field.type === 'text'" v-model="data" :minlength="field.minlength" :maxlength="field.maxlength" :placeholder="field.placeholder"></el-input>
   <el-input v-else-if="field.type === 'textarea'" v-model="data" type="textarea" :placeholder="field.placeholder" :rows="field.rows"></el-input>
   <el-input-number v-else-if="field.type === 'number'" v-model="data" :placeholder="field.placeholder"></el-input-number>
   <el-date-picker v-else-if="field.type === 'date'" v-model="data" :type="field.dateType ?? 'date'" :placeholder="field.placeholder" />

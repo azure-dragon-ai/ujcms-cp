@@ -143,7 +143,7 @@ const fetchData = async () => {
   try {
     const { content, totalElements } = await queryArticlePage({
       ...toParams(params.value),
-      Q_EQ_status: status.value !== -1 ? status.value : undefined,
+      Q_EQ_status_Short: status.value !== -1 ? status.value : undefined,
       subChannelId: channel.value?.id,
       Q_OrderBy: sort.value,
       page: currentPage.value,
@@ -708,7 +708,7 @@ const cancelSticky = async (id: string) => {
             prop="stickyDate"
             :rules="{
               validator: (rule, value, callback) => {
-                if (value != null && Date.now() > value.getTime()) {
+                if (value != null && Date.now() > new Date(value).getTime()) {
                   callback($t('article.error.stickyDate.beforeCurrent'));
                   return;
                 }

@@ -25,7 +25,7 @@ const buttonLoading = ref<boolean>(false);
 const redirect = ref<string | null>();
 const route = useRoute();
 const router = useRouter();
-const title = import.meta.env.VITE_APP_TITLE || 'UJCMS';
+const title = import.meta.env.VITE_APP_NAME || 'UJCMS';
 const envMode = import.meta.env.MODE;
 
 const changePasswordVisible = ref<boolean>(false);

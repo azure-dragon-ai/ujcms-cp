@@ -8,8 +8,13 @@ export const queryChannelList = async (params?: Record<string, any>): Promise<an
 export const queryChannel = async (id: string): Promise<any> => (await axios.get(`/backend/core/channel/${id}`)).data;
 export const createChannel = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/core/channel', data)).data;
 export const updateChannel = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/core/channel?_method=put', data)).data;
+export const updateChannelNav = async (id: string, nav: boolean): Promise<any> => (await axios.post('/backend/core/channel/nav?_method=put', { id, nav })).data;
 export const moveChannel = async (fromId: string, toId: string, type: 'inner' | 'before' | 'after'): Promise<any> =>
   (await axios.post('/backend/core/channel/move?_method=put', { fromId, toId, type })).data;
+export const batchMoveChannel = async (fromIds: string[], toId: string, type: 'inner' | 'before' | 'after'): Promise<any> =>
+  (await axios.post('/backend/core/channel/batch-move?_method=put', { fromIds, toId, type })).data;
+export const batchMergeChannel = async (fromIds: string[], toId: string): Promise<any> =>
+  (await axios.post('/backend/core/channel/batch-merge?_method=put', { fromIds, toId })).data;
 export const tidyTreeChannel = async (): Promise<any> => (await axios.post('/backend/core/channel/tidy-tree?_method=put')).data;
 export const deleteChannel = async (data: string[]): Promise<any> => (await axios.post('/backend/core/channel?_method=delete', data)).data;
 export const queryChannelPermissions = async (): Promise<any> => (await axios.get('/backend/core/channel/channel-permissions')).data;

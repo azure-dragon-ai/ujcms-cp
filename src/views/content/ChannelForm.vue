@@ -134,8 +134,8 @@ const initCustoms = (customs: any) => {
     :bean-ids="beanIds"
     :focus="focus"
     :init-values="
-      (bean: any): any => ({
-        parentId: bean?.parentId ?? parent?.id,
+      (bean: any, isEdit?: boolean): any => ({
+        parentId: isEdit ? bean?.parentId : (parent?.id ?? bean?.parentId),
         type: 1,
         channelModelId: bean?.channelModelId ?? parent?.channelModelId ?? channelModelList[0]?.id,
         articleModelId: bean?.articleModelId ?? parent?.articleModelId ?? articleModelList[0]?.id,
@@ -343,10 +343,10 @@ const initCustoms = (customs: any) => {
             </el-col>
           </el-row>
         </el-col>
-        <el-col :span="6" class="el-form--label-top label-top">
+        <el-col :span="6">
           <el-tabs type="border-card" class="ml-5">
             <el-tab-pane :label="$t('channel.tabs.setting')">
-              <el-form-item prop="parentId" :label="asides['parent'].name ?? $t('channel.parent')">
+              <el-form-item prop="parentId" :label="asides['parent'].name ?? $t('channel.parent')" label-position="top">
                 <el-tree-select
                   v-model="values.parentId"
                   :data="parentChannelList"
@@ -360,7 +360,7 @@ const initCustoms = (customs: any) => {
                   class="w-full"
                 />
               </el-form-item>
-              <el-form-item prop="type" :label="asides['type'].name ?? $t('channel.type')" :rules="{ required: true, message: () => $t('v.required') }">
+              <el-form-item prop="type" :label="asides['type'].name ?? $t('channel.type')" :rules="{ required: true, message: () => $t('v.required') }" label-position="top">
                 <el-select v-model="values.type" class="w-full">
                   <el-option v-for="n in [1, 2, 3, 4]" :key="n" :label="$t(`channel.type.${n}`)" :value="n"></el-option>
                 </el-select>
@@ -369,6 +369,7 @@ const initCustoms = (customs: any) => {
                 prop="processKey"
                 :label="asides['processKey'].name ?? $t('channel.processKey')"
                 :rules="asides['processKey'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                label-position="top"
               >
                 <el-select v-model="values.processKey" clearable class="w-full">
                   <el-option v-for="item in processModelList" :key="item.key" :label="item.name" :value="item.key"></el-option>
@@ -379,15 +380,21 @@ const initCustoms = (customs: any) => {
                 prop="performanceType"
                 :label="asides['performanceType'].name ?? $t('channel.performanceType')"
                 :rules="asides['performanceType'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                label-position="top"
               >
                 <el-select v-model="values.performanceTypeId" clearable class="w-full">
                   <el-option v-for="item in performanceTypeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item prop="pageSize" :label="asides['pageSize'].name ?? $t('channel.pageSize')" :rules="{ required: true, message: () => $t('v.required') }">
+              <el-form-item
+                prop="pageSize"
+                :label="asides['pageSize'].name ?? $t('channel.pageSize')"
+                :rules="{ required: true, message: () => $t('v.required') }"
+                label-position="top"
+              >
                 <el-input-number v-model="values.pageSize" :min="1" :max="200"></el-input-number>
               </el-form-item>
-              <el-form-item prop="orderDesc" :rules="{ required: true, message: () => $t('v.required') }">
+              <el-form-item prop="orderDesc" :rules="{ required: true, message: () => $t('v.required') }" label-position="top">
                 <template #label><label-tip :label="asides['orderDesc'].name ?? $t('channel.orderDesc')" message="channel.orderDesc" help /></template>
                 <el-switch v-model="values.orderDesc" />
               </el-form-item>
@@ -399,14 +406,4 @@ const initCustoms = (customs: any) => {
   </dialog-form>
 </template>
 
-<style lang="scss" scoped>
-.label-top {
-  :deep(.el-form-item) {
-    margin-bottom: 12px;
-  }
-  :deep(.el-form-item__label) {
-    margin-bottom: 4px;
-    width: 100% !important;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

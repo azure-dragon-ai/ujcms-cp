@@ -3,17 +3,19 @@ import { computed, onBeforeUnmount, onMounted, ref, watch, nextTick } from 'vue'
 import { ElMessage } from 'element-plus';
 import type Node from 'element-plus/es/components/tree/src/model/node';
 import type { NodeDropType } from 'element-plus/es/components/tree/src/tree.type';
-import { Plus, Delete, Search, Edit, Grid, FirstAidKit, QuestionFilled } from '@element-plus/icons-vue';
+import { Plus, Delete, Search, Edit, Grid, FirstAidKit, QuestionFilled, Switch, CopyDocument } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import Sortable from 'sortablejs';
 import { perm, currentUser, hasPermission } from '@/stores/useCurrentUser';
 import { toParams, resetParams } from '@/utils/common';
 import { toTree, flatTree } from '@/utils/tree';
-import { deleteChannel, queryChannelList, queryChannelPermissions, moveChannel, tidyTreeChannel } from '@/api/content';
+import { deleteChannel, queryChannelList, queryChannelPermissions, updateChannelNav, moveChannel, tidyTreeChannel } from '@/api/content';
 import { queryProcessDefinitionList } from '@/api/system';
 import { ColumnList, ColumnSetting } from '@/components/TableList';
 import { QueryForm, QueryItem } from '@/components/QueryForm';
 import ChannelForm from './ChannelForm.vue';
+import ChannelMoveForm from './ChannelMoveForm.vue';
+import ChannelMergeForm from './ChannelMergeForm.vue';
 
 defineOptions({
   name: 'ChannelList',
@@ -39,6 +41,9 @@ const channelTreeData = ref<any[]>([]);
 const channelTreeLoading = ref<boolean>(false);
 const channelTreeFilter = ref<string>();
 const channel = ref<any>();
+
+const moveFormVisible = ref<any>(false);
+const mergeFormVisible = ref<any>(false);
 
 const deletable = (bean: any) => currentUser.allChannelPermission || channelPermissions.value.includes(bean.id);
 
@@ -150,9 +155,19 @@ const handleAdd = (bean: any) => {
   formVisible.value = true;
 };
 const handleEdit = (id: string) => {
+  if (!hasPermission('channel:update')) {
+    return;
+  }
   beanId.value = id;
   parent.value = null;
   formVisible.value = true;
+};
+const handleUpdateNav = (id: string, nav: boolean) => {
+  if (!hasPermission('channel:update')) {
+    return;
+  }
+  updateChannelNav(id, nav);
+  ElMessage.success(t('success'));
 };
 const handleDelete = async (ids: string[]) => {
   await deleteChannel(ids);
@@ -238,6 +253,8 @@ const treeRootClick = () => {
             <el-button :disabled="selection.length <= 0 || perm('channel:delete')" :icon="Delete">{{ $t('delete') }}</el-button>
           </template>
         </el-popconfirm>
+        <el-button :disabled="perm('channel:update')" :icon="Switch" @click="() => (moveFormVisible = true)">{{ $t('channel.op.batchMove') }}</el-button>
+        <el-button :disabled="perm('channel:update')" :icon="CopyDocument" @click="() => (mergeFormVisible = true)">{{ $t('channel.op.batchMerge') }}</el-button>
         <el-button :disabled="perm('channel:tidyTree')" :icon="FirstAidKit" @click="() => handleTidyTree()">{{ $t('tidyTree') }}</el-button>
         <el-tooltip placement="top" :content="$t('tidyTree.tooltip')">
           <el-icon class="ml-1 text-base align-text-bottom"><QuestionFilled /></el-icon>
@@ -275,7 +292,7 @@ const treeRootClick = () => {
             </el-table-column>
             <el-table-column property="nav" :label="$t('channel.nav')" min-width="50">
               <template #default="{ row }">
-                <el-tag :type="row.nav ? 'success' : 'info'" size="small">{{ $t(row.nav ? 'yes' : 'no') }}</el-tag>
+                <el-switch v-model="row.nav" size="small" :disabled="perm('channel:update')" @click="() => handleUpdateNav(row.id, row.nav)" />
               </template>
             </el-table-column>
             <el-table-column property="id" label="ID" width="170" sortable="custom"></el-table-column>
@@ -308,6 +325,8 @@ const treeRootClick = () => {
         </el-table>
       </div>
       <channel-form v-model="formVisible" :bean-id="beanId" :bean-ids="beanIds" :parent="parent" @finished="handleFinished" />
+      <channel-move-form v-model="moveFormVisible" @finished="handleFinished" />
+      <channel-merge-form v-model="mergeFormVisible" @finished="handleFinished" />
     </el-main>
   </el-container>
 </template>

@@ -770,7 +770,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
               </template>
             </el-row>
           </el-col>
-          <el-col :span="6" class="el-form--label-top label-top">
+          <el-col :span="6">
             <el-tabs type="border-card" class="ml-5">
               <el-tab-pane :label="$t('article.tabs.setting')">
                 <el-form-item
@@ -788,6 +788,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                       },
                     },
                   ]"
+                  label-position="top"
                 >
                   <el-tree-select
                     v-model="values.channelId"
@@ -804,7 +805,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                     "
                   />
                 </el-form-item>
-                <el-form-item v-if="asides['org'].show" :label="asides['org'].name ?? $t('article.org')" :required="isEdit">
+                <el-form-item v-if="asides['org'].show" :label="asides['org'].name ?? $t('article.org')" :required="isEdit" label-position="top">
                   <el-tree-select
                     v-model="values.orgId"
                     :data="bean.org?.id != null && orgIds.indexOf(bean.org.id) === -1 ? [bean.org, ...orgList] : orgList"
@@ -816,7 +817,12 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   />
                   <!-- <el-input :value="values.org?.name" disabled></el-input> -->
                 </el-form-item>
-                <el-form-item v-if="asides['publishDate'].show" prop="publishDate" :rules="isEdit ? { required: true, message: () => $t('v.required') } : undefined">
+                <el-form-item
+                  v-if="asides['publishDate'].show"
+                  prop="publishDate"
+                  :rules="isEdit ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
+                >
                   <template #label><label-tip :label="asides['publishDate'].name ?? $t('article.publishDate')" message="article.publishDate" help /></template>
                   <el-date-picker
                     v-model="values.publishDate"
@@ -834,6 +840,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   v-if="asides['onlineDate'].show"
                   prop="onlineDate"
                   :rules="asides['onlineDate'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
                 >
                   <template #label><label-tip :label="asides['onlineDate'].name ?? $t('article.onlineDate')" message="article.onlineDate" help /></template>
                   <el-date-picker v-model="values.onlineDate" type="datetime" class="w-full"></el-date-picker>
@@ -842,6 +849,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   v-if="asides['offlineDate'].show"
                   prop="offlineDate"
                   :rules="asides['offlineDate'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
                 >
                   <template #label><label-tip :label="asides['offlineDate'].name ?? $t('article.offlineDate')" message="article.offlineDate" help /></template>
                   <el-date-picker v-model="values.offlineDate" type="datetime" class="w-full"></el-date-picker>
@@ -851,6 +859,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   prop="source"
                   :label="asides['source'].name ?? $t('article.source')"
                   :rules="asides['source'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
                 >
                   <el-autocomplete
                     v-model="values.source"
@@ -868,6 +877,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   prop="articleTemplate"
                   :label="asides['articleTemplate'].name ?? $t('article.articleTemplate')"
                   :rules="asides['articleTemplate'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
                 >
                   <template #label><label-tip :label="asides['articleTemplate'].name ?? $t('article.articleTemplate')" message="article.articleTemplate" help /></template>
                   <el-select v-model="values.articleTemplate" clearable class="w-full">
@@ -879,24 +889,25 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   v-if="asides['allowComment'].show"
                   prop="allowComment"
                   :rules="asides['allowComment'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
                 >
                   <template #label><label-tip :label="asides['allowComment'].name ?? $t('article.allowComment')" message="article.allowComment" help /></template>
                   <el-switch v-model="values.allowComment"></el-switch>
                 </el-form-item>
                 -->
-                <el-form-item v-if="asides['user'].show" :label="asides['user'].name ?? $t('article.user')">
+                <el-form-item v-if="asides['user'].show" :label="asides['user'].name ?? $t('article.user')" label-position="top">
                   <el-input :model-value="values.user?.username" disabled></el-input>
                 </el-form-item>
-                <el-form-item v-if="asides['created'].show" :label="asides['created'].name ?? $t('article.created')">
+                <el-form-item v-if="asides['created'].show" :label="asides['created'].name ?? $t('article.created')" label-position="top">
                   <el-date-picker :model-value="values.created" type="datetime" class="w-full" disabled></el-date-picker>
                 </el-form-item>
-                <el-form-item v-if="asides['modifiedUser'].show" :label="asides['modifiedUser'].name ?? $t('article.modifiedUser')">
+                <el-form-item v-if="asides['modifiedUser'].show" :label="asides['modifiedUser'].name ?? $t('article.modifiedUser')" label-position="top">
                   <el-input :model-value="values.modifiedUser?.username" disabled></el-input>
                 </el-form-item>
-                <el-form-item v-if="asides['modified'].show" :label="asides['modified'].name ?? $t('article.modified')">
+                <el-form-item v-if="asides['modified'].show" :label="asides['modified'].name ?? $t('article.modified')" label-position="top">
                   <el-date-picker :model-value="values.modified" type="datetime" class="w-full" disabled></el-date-picker>
                 </el-form-item>
-                <el-form-item v-if="values.destList?.length > 0" :label="$t('article.destList')">
+                <el-form-item v-if="values.destList?.length > 0" :label="$t('article.destList')" label-position="top">
                   <el-tooltip
                     v-for="item in values.destList"
                     :key="item.id"
@@ -942,14 +953,4 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.label-top {
-  :deep(.el-form-item) {
-    margin-bottom: 12px;
-  }
-  :deep(.el-form-item__label) {
-    margin-bottom: 4px;
-    width: 100% !important;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

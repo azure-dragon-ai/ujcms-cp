@@ -10,21 +10,23 @@ UJCMS-CP是UJCMS的后台前端项目。使用 Vue 3、Vite、TypeScript、Eleme
 
 * 使用 vscode 开发工具。
 * 安装 node 环境。Node 18+ 版本。
-* 使用淘宝 npm 镜像。
-* 安装依赖，执行：npm install
-* 启动程序，执行：npm run dev
+* 安装 pnpm。执行：npm install -g pnpm
+* 使用淘宝 npm 镜像。执行：pnpm set registry https://registry.npmmirror.com/
+* 安装依赖。执行：pnpm install
+* 启动程序。执行：pnpm run dev
 * 访问：http://localhost:9520
 * 用户名：admin，密码：password。
 
 ## 修改后台标识
 
-* 修改`.env`文件中的`VITE_APP_TITLE=UJCMS`配置，可改变登录页、后台左侧导航等处的`UJCMS`标识。
+* 修改`.env`文件中的`VITE_APP_TITLE=UJCMS后台管理`配置，可改变浏览器页签上的标题。
+* 修改`.env`文件中的`VITE_APP_NAME=UJCMS`配置，可改变登录页、后台左侧导航等处的`UJCMS`标识。
 * 替换`/public/favicon.png`图片，可改变浏览器标签页上显示的图标。
 * 修改`/src/layout/components/AppSidebar/Logo.vue`文件中的`svg`图标，可改变后台左侧导航处LOGO图标。
 
 ## 编译及部署
 
-* 执行：npm run build
+* 执行：pnpm run build
 * 编译后的程序在`/dist`目录。
 * 将`/dist`目录里的文件拷贝至主项目UJCMS的`/src/main/webapp/cp`目录下（先将原目录下的文件删除）。
 

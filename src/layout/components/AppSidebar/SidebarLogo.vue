@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps({ collapse: { type: Boolean, required: true } });
-const title = import.meta.env.VITE_APP_TITLE || 'UJCMS';
+const title = import.meta.env.VITE_APP_NAME || 'UJCMS';
 </script>
 
 <template>

@@ -15,7 +15,7 @@ const messages = {
   },
 };
 
-const numberFormats = {
+const numberFormats: any = {
   'zh-cn': {
     decimal: {
       style: 'decimal',

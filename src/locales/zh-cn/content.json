@@ -1,5 +1,14 @@
 {
+  "channel.op.batchMove": "批量移动",
+  "channel.op.batchMerge": "批量合并",
   "channel.tabs.setting": "设置",
+  "channel.batchMove.srcChannel": "原栏目",
+  "channel.batchMove.moveTo": "移动至",
+  "channel.batchMove.moveTo.inner": "栏目之内",
+  "channel.batchMove.moveTo.before": "栏目之前",
+  "channel.batchMove.moveTo.after": "栏目之后",
+  "channel.batchMerge.srcChannel": "原栏目",
+  "channel.batchMerge.mergeTo": "合并至",
   "channel.root": "根栏目",
   "channel.parent": "上级栏目",
   "channel.channelModel": "栏目模型",
@@ -40,6 +49,8 @@
   "channel.error.aliasPattern": "别名只能由英文字母、数字、下划线、中划线组成",
   "channel.error.aliasExist": "栏目别名已经存在",
   "channel.error.linkUrl": "必须以 http 或 / 开头",
+  "channel.error.srcChannelRequired": "请选择“原栏目”",
+  "channel.error.moveToChannelRequired": "请选择“移动至”栏目",
 
   "article.op.recommendTo": "推荐到",
   "article.op.docImport": "DOC导入",

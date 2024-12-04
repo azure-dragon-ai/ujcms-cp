@@ -15,7 +15,7 @@ const { t, n } = useI18n();
 const { modelValue: visible } = toRefs(props);
 const loading = ref<boolean>(false);
 const values = ref<any>({});
-const title = import.meta.env.VITE_APP_TITLE || 'UJCMS';
+const title = import.meta.env.VITE_APP_NAME || 'UJCMS';
 
 const memoryChart = shallowRef<HTMLElement>();
 

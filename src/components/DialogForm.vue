@@ -30,7 +30,7 @@ const props = defineProps({
   name: { type: String, required: true },
   beanId: { type: [Number, String], default: null },
   beanIds: { type: Array as PropType<string[] | number[]>, required: true },
-  initValues: { type: Function as PropType<(bean?: any) => any>, required: true },
+  initValues: { type: Function as PropType<(bean?: any, isEditor?: boolean) => any>, required: true },
   toValues: { type: Function as PropType<(bean: any) => any>, required: true },
   queryBean: { type: Function as PropType<(id: any) => Promise<any>>, required: true },
   createBean: { type: Function as PropType<(bean: any) => Promise<any>>, required: true },
@@ -81,7 +81,7 @@ const title = computed(() => `${name.value} - ${isEdit.value ? `${t(disabled.val
 const loadBean = async () => {
   loading.value = true;
   try {
-    bean.value = id.value != null ? await props.queryBean(id.value) : props.initValues(values.value);
+    bean.value = id.value != null ? await props.queryBean(id.value) : props.initValues(values.value, isEdit.value);
     origValues.value = id.value != null ? props.toValues(bean.value) : bean.value;
     emit('update:values', _.cloneDeep(origValues.value));
     emit('beanChange', bean.value);
@@ -164,7 +164,7 @@ const handleSubmit = async () => {
       } else {
         await props.createBean(values.value);
         focus.value?.focus?.();
-        emit('update:values', props.initValues(values.value));
+        emit('update:values', props.initValues(values.value, isEdit.value));
         form.value.resetFields();
       }
       ElMessage.success(t('success'));

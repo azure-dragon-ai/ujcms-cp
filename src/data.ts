@@ -894,6 +894,9 @@ export const logNames = [
 
   'channel.create',
   'channel.update',
+  'channel.updateNav',
+  'channel.batchMove',
+  'channel.batchMerge',
   'channel.delete',
   'channel.move',
   'channel.tidyTree',

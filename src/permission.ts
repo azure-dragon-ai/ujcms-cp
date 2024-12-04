@@ -48,7 +48,7 @@ router.afterEach((to: RouteLocationNormalized) => {
   NProgress.done();
 });
 
-const title = import.meta.env.VITE_APP_TITLE || 'UJCMS';
+const title = import.meta.env.VITE_APP_TITLE || 'UJCMS后台管理';
 
 function getPageTitle(pageTitle?: string): string {
   if (pageTitle) {
