@@ -143,10 +143,10 @@ const confirm = () => {
         </el-table>
         <el-pagination
           v-model:current-page="currentPage"
-          v-model:pageSize="pageSize"
+          v-model:page-size="pageSize"
           :total="total"
           layout="total, prev, pager, next"
-          small
+          size="small"
           class="px-3 py-2"
           @size-change="() => fetchData()"
           @current-change="() => fetchData()"

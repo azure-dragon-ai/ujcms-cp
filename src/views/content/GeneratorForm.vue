@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { ElMessage } from 'element-plus';
 import type { ElForm } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { querySiteHtmlSettings, updateSiteHtmlSettings, queryConfigGrey, updateConfigGrey } from '@/api/config';

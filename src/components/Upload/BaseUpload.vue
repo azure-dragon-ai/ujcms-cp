@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, toRefs, computed, PropType } from 'vue';
-import { ElMessage, UploadFile, UploadFiles } from 'element-plus';
+import { UploadFile, UploadFiles } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { handleError } from '@/utils/request';
 import { getAuthHeaders } from '@/utils/auth';

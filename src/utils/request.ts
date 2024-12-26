@@ -1,7 +1,6 @@
 import { h } from 'vue';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { ElMessageBox } from 'element-plus';
 import i18n from '@/i18n';
 import { getAuthHeaders, removeAccessToken, removeRefreshToken, setAccessAt } from '@/utils/auth';
 import { getSiteHeaders } from '@/utils/common';

@@ -5,7 +5,6 @@ export default { name: 'ImportData' };
 <script setup lang="ts">
 import LabelTip from '@/components/LabelTip.vue';
 import { Delete, QuestionFilled } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';

@@ -9,7 +9,8 @@ const lang = computed(() => getElementPlusLocale(locale.value as string));
 </script>
 
 <template>
-  <el-config-provider :locale="lang">
+  <!-- tinymce 对话框的层级太低，必须调低 ElementPlus 的 对话框层级（默认为2000） -->
+  <el-config-provider :locale="lang" :z-index="500">
     <router-view />
   </el-config-provider>
 </template>

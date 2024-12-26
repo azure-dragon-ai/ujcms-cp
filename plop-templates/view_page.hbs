@@ -1,10 +1,5 @@
-<script lang="ts">
-export default { name: '{{pascalCase name}}List' };
-</script>
-
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import { perm } from '@/stores/useCurrentUser';
@@ -14,6 +9,9 @@ import { ColumnList, ColumnSetting } from '@/components/TableList';
 import { QueryForm, QueryItem } from '@/components/QueryForm';
 import {{pascalCase name}}Form from './{{pascalCase name}}Form.vue';
 
+defineOptions({
+  name: '{{pascalCase name}}List',
+});
 const { t } = useI18n();
 const params = ref<any>({});
 const sort = ref<any>();
@@ -120,7 +118,7 @@ const handleDelete = async (ids: string[]) => {
         :page-sizes
         :layout="pageLayout"
         class="justify-end px-3 py-2"
-        small
+        size="small"
         background
         @size-change="() => fetchData()"
         @current-change="() => fetchData()"

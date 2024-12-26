@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete, ArrowDown } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -37,7 +36,7 @@ const fetchData = async () => {
   try {
     const { content, totalElements } = await queryMessageBoardPage({
       ...toParams(params.value),
-      Q_EQ_status: status.value !== -1 ? status.value : undefined,
+      Q_EQ_status_Short: status.value !== -1 ? status.value : undefined,
       Q_OrderBy: sort.value,
       page: currentPage.value,
       pageSize: pageSize.value,
@@ -175,11 +174,11 @@ const handleStatus = async (ids: string[], status: number) => {
       </el-table>
       <el-pagination
         v-model:current-page="currentPage"
-        v-model:pageSize="pageSize"
+        v-model:page-size="pageSize"
         :total="total"
         :page-sizes="pageSizes"
         :layout="pageLayout"
-        small
+        size="small"
         background
         class="justify-end px-3 py-2"
         @size-change="() => fetchData()"

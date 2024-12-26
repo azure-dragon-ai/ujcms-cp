@@ -2,7 +2,6 @@
 import { onMounted, ref, watchEffect } from 'vue';
 import { LocationQueryValue, useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { ElMessageBox } from 'element-plus';
 import { User, Lock, Picture, Cellphone } from '@element-plus/icons-vue';
 import { sm2Encrypt } from '@/utils/sm';
 import { removeAccessToken, removeRefreshToken } from '@/utils/auth';

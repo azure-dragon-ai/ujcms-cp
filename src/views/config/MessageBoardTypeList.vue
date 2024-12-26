@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete, Grid } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import Sortable from 'sortablejs';

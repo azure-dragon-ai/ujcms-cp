@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, toRefs, PropType } from 'vue';
-import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { toTree, disableParentTree, disableTree } from '@/utils/tree';
 import { queryArticle, queryChannelList, internalPushArticle, externalPushArticle } from '@/api/content';

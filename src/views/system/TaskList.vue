@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Delete } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import dayjs from 'dayjs';
@@ -121,11 +120,11 @@ defineExpose({ fetchData });
       </el-table>
       <el-pagination
         v-model:current-page="currentPage"
-        v-model:pageSize="pageSize"
+        v-model:page-size="pageSize"
         :total="total"
         :page-sizes="pageSizes"
         :layout="pageLayout"
-        small
+        size="small"
         background
         class="justify-end px-3 py-2"
         @size-change="() => fetchData()"

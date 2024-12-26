@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref, toRefs, watch, PropType } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
 import { Finished, Box, DocumentRemove, Delete, CircleCheck, CircleClose, View, Back, SetUp, Compass } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import * as htmlparser2 from 'htmlparser2';

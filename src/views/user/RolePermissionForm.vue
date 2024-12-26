@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, computed, onMounted, toRefs, nextTick } from 'vue';
-import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { getPermsTreeData } from '@/data';
 import { toTree, flatTree, disablePermissionTree } from '@/utils/tree';

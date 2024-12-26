@@ -1,10 +1,5 @@
-<script lang="ts">
-export default { name: '{{pascalCase name}}List' };
-</script>
-
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete, Grid } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import Sortable from 'sortablejs';
@@ -15,6 +10,9 @@ import { ColumnList, ColumnSetting } from '@/components/TableList';
 import { QueryForm, QueryItem } from '@/components/QueryForm';
 import {{pascalCase name}}Form from './{{pascalCase name}}Form.vue';
 
+defineOptions({
+  name: '{{pascalCase name}}List',
+});
 const { t } = useI18n();
 const params = ref<any>({});
 const sort = ref<any>();

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ElMessage } from 'element-plus';
 import { sm2Encrypt } from '@/utils/sm';
 import { useSysConfigStore } from '@/stores/sysConfigStore';
 import { queryClientPublicKey } from '@/api/login';

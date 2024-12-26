@@ -2,7 +2,6 @@
 import { ref, toRefs, watch } from 'vue';
 import { Picture } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
-import { ElMessage } from 'element-plus';
 import { tryCaptcha, mobileNotExist, queryCaptcha, sendMobileMessage } from '@/api/login';
 
 defineOptions({

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, toRefs, watch } from 'vue';
-import { ElMessage } from 'element-plus';
 import { CircleClose } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import draggable from 'vuedraggable';

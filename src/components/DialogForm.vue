@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, PropType, ref, toRefs, watch } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import _ from 'lodash';

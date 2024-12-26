@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import { perm, currentUser } from '@/stores/useCurrentUser';
@@ -66,7 +65,7 @@ const handlePermissionEdit = (id: string) => {
   beanId.value = id;
   permissionFormVisible.value = true;
 };
-const deletable = (id: string) => id > 10;
+const deletable = (id: string) => Number(id) > 10;
 const handleDelete = async (ids: string[]) => {
   const deletableIds = ids.filter((id) => deletable(id));
   if (deletableIds.length > 0) {

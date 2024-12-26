@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, toRefs, computed, watch } from 'vue';
-import { ElMessage, useFormItem } from 'element-plus';
+import { useFormItem } from 'element-plus';
 import { Close, Document, CircleCheck } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import { handleError } from '@/utils/request';

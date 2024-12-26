@@ -4,6 +4,9 @@ import vue from '@vitejs/plugin-vue';
 import legacy from '@vitejs/plugin-legacy';
 import vueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import { viteMockServe } from 'vite-plugin-mock';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig(({ mode }: ConfigEnv) => {
   // 加载 .env 文件
@@ -40,7 +43,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       },
     },
     build: {
-      chunkSizeWarningLimit: 1500,
+      chunkSizeWarningLimit: 2000,
     },
     plugins: [
       vue(),
@@ -54,6 +57,13 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         ignore: /^_/,
         mockPath: 'mock',
         enable: env.VITE_USE_MOCK === 'true',
+      }),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+        eslintrc: { enabled: true },
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
       }),
     ],
   };

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, watch, onBeforeUnmount, onMounted, ref, nextTick } from 'vue';
 import { currentUser, perm, hasPermission } from '@/stores/useCurrentUser';
-import { ElMessage } from 'element-plus';
 import type Node from 'element-plus/es/components/tree/src/model/node';
 import type { NodeDropType } from 'element-plus/es/components/tree/src/tree.type';
 import { Plus, Delete, Search, Edit, Grid, FirstAidKit, QuestionFilled } from '@element-plus/icons-vue';

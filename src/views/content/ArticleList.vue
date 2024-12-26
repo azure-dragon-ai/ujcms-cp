@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, watch, ref, onMounted, onBeforeUnmount } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Cpu, MoreFilled, DocumentCopy, Grid } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -577,6 +576,8 @@ const cancelSticky = async (id: string) => {
               display="none"
               show-overflow-tooltip
             ></el-table-column>
+            <el-table-column property="ups" :label="$t('article.ups')" sort-by="@articleExt-ups" sortable="custom" display="none" show-overflow-tooltip></el-table-column>
+            <el-table-column property="downs" :label="$t('article.downs')" sort-by="@articleExt-downs" sortable="custom" display="none" show-overflow-tooltip></el-table-column>
             <el-table-column property="status" :label="$t('article.status')" sortable="custom" show-overflow-tooltip>
               <template #default="{ row }">
                 <el-tag v-if="row.status === 0" type="success" size="small">{{ $t(`article.status.${row.status}`) }}</el-tag>
@@ -671,11 +672,11 @@ const cancelSticky = async (id: string) => {
         </el-table>
         <el-pagination
           v-model:current-page="currentPage"
-          v-model:pageSize="pageSize"
+          v-model:page-size="pageSize"
           :total="total"
           :page-sizes="pageSizes"
           :layout="pageLayout"
-          small
+          size="small"
           background
           class="justify-end px-3 py-2"
           @size-change="() => fetchData()"

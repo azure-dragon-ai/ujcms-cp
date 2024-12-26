@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useSlots, watch, provide, computed, ref, toRefs } from 'vue';
+import { useSlots, watch, provide, computed, ref, toRefs, VNode } from 'vue';
 import { Plus, Minus, Search, Refresh } from '@element-plus/icons-vue';
 import QueryInput from './QueryInput.vue';
 
 const props = defineProps({ params: { type: Object, required: true } });
 const { params } = toRefs(props);
-const slots = useSlots();
+const slots: Record<string, (...args: any[]) => VNode[]> = useSlots();
 provide('params', params);
 defineEmits({
   search: null,
@@ -67,7 +67,7 @@ const handelRow = (index: number) => {
     <div class="space-y-1">
       <div v-for="(name, index) in names" :key="name" class="flex">
         <el-button :icon="index == 0 ? Plus : Minus" :disabled="index <= 0 && remains.length <= 0" circle @click="() => handelRow(index)"></el-button>
-        <el-select v-model="names[index]" class="w-36" @change="() => clearParams()">
+        <el-select v-model="names[index]" class="w-44" @change="() => clearParams()">
           <el-option v-for="item in data.filter((it) => it.name === names[index] || remains.includes(it))" :key="item.name" :label="item.label" :value="item.name"></el-option>
         </el-select>
         <query-input :inputs="inputs" :name="names[index]"></query-input>

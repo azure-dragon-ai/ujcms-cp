@@ -5,7 +5,7 @@ import DialogForm from '@/components/DialogForm.vue';
 import LabelTip from '@/components/LabelTip.vue';
 
 defineOptions({
-  name: 'LoginLogForm',
+  name: '{{pascalCase name}}Form',
 });
 const visible = defineModel<boolean>({ default: false });
 defineProps<{ beanId?: string; beanIds: string[] }>();

@@ -6,7 +6,7 @@ export const queryMessageBoardUnreviewedCount = async (params?: Record<string, a
 export const queryMessageBoard = async (id: string): Promise<any> => (await axios.get(`/backend/ext/message-board/${id}`)).data;
 export const createMessageBoard = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/message-board', data)).data;
 export const updateMessageBoard = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/message-board?_method=put', data)).data;
-export const updateMessageBoardStatus = async (ids: string[], status: string): Promise<any> =>
+export const updateMessageBoardStatus = async (ids: string[], status: number): Promise<any> =>
   (await axios.post('/backend/ext/message-board/status?_method=put', { ids, status })).data;
 export const deleteMessageBoard = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/message-board?_method=delete', data)).data;
 

@@ -72,7 +72,7 @@ onMounted(async () => {
         <el-col :span="24">
           <el-form-item prop="text" :rules="{ required: true, message: () => $t('v.required') }">
             <template #label><label-tip message="messageBoard.text" /></template>
-            <el-input v-model="values.text" type="textarea" rows="8" maxlength="65535"></el-input>
+            <el-input v-model="values.text" type="textarea" :rows="8" maxlength="65535"></el-input>
           </el-form-item>
         </el-col>
         <el-col v-if="isEdit" :span="24">

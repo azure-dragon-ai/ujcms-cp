@@ -1,6 +1,6 @@
 import { reactive, readonly } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
-import { Action, ElMessageBox, MessageBoxState } from 'element-plus';
+import { Action, MessageBoxState } from 'element-plus';
 import i18n from '@/i18n';
 import { sm2Encrypt } from '@/utils/sm';
 import { queryClientPublicKey } from '@/api/login';

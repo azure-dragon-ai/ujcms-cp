@@ -3,7 +3,6 @@ import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { toTree } from '@/utils/tree';
 import { queryChannelList, batchMergeChannel } from '@/api/content';
-import { ElMessage } from 'element-plus';
 
 defineOptions({
   name: 'ChannelMergeForm',

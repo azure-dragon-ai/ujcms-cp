@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, toRefs, watch } from 'vue';
-import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { getModelData, mergeModelFields } from '@/data';
 import { currentUser } from '@/stores/useCurrentUser';

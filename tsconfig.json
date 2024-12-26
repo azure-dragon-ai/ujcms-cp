@@ -23,6 +23,8 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "mock/**/*.ts"],
+  // 使用按需导入之后，不能手动 import { ElMessageBox } from 'element-plus'，否则会导致没有css样式
+  // 应删除对 element-plus 的 import，但删除后会飘红报错，这是需要这里加上 auto-imports.d.ts 即可
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "mock/**/*.ts", "auto-imports.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

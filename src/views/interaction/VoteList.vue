@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Plus, Delete, Grid } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import dayjs from 'dayjs';
@@ -173,12 +172,12 @@ const handleDelete = async (ids: string[]) => {
       </el-table>
       <el-pagination
         v-model:current-page="currentPage"
-        v-model:pageSize="pageSize"
+        v-model:page-size="pageSize"
         :total="total"
         :page-sizes="pageSizes"
         :layout="pageLayout"
         class="justify-end px-3 py-2"
-        small
+        size="small"
         background
         @size-change="() => fetchData()"
         @current-change="() => fetchData()"

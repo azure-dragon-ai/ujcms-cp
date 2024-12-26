@@ -2,7 +2,6 @@
 import { ref, PropType } from 'vue';
 import { Codemirror } from 'vue-codemirror';
 import { html } from '@codemirror/lang-html';
-import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import DialogForm from '@/components/DialogForm.vue';
 import LabelTip from '@/components/LabelTip.vue';

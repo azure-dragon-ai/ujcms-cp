@@ -1,7 +1,7 @@
-/* eslint-disable */
-const colors = require('tailwindcss/colors');
+/** @type {import('tailwindcss').Config} */
+import colors from 'tailwindcss/colors';
 
-module.exports = {
+export default {
   important: true,
   content: ['./src/**/*.{vue,ts}'],
   theme: {

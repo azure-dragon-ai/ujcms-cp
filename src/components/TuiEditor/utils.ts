@@ -1,4 +1,3 @@
-import { ElMessageBox } from 'element-plus';
 import { imageUploadUrl } from '@/api/config';
 import { getAuthHeaders } from '@/utils/auth';
 import Editor from '@toast-ui/editor';

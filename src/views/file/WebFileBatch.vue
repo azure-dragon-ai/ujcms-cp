@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, computed, PropType, toRefs } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
 import { Folder } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 
