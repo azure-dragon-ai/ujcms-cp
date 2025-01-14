@@ -93,7 +93,7 @@ watch(visible, () => {
             </td>
              -->
             <td class="p-2 border-b" :rowspan="task.commentList.length > 0 ? task.commentList.length : 1">
-              {{ task.duration ? dayjs.duration(task.duration).locale('zh-cn').humanize() : undefined }}
+              {{ task.duration ? dayjs.duration(Number(task.duration)).locale('zh-cn').humanize() : undefined }}
             </td>
             <td class="p-2 border-b">{{ task.commentList[0] ? dayjs(task.commentList[0].time).format('YYYY-MM-DD HH:mm') : undefined }}</td>
             <td class="p-2 border-b">{{ task.commentList[0]?.userName }}</td>

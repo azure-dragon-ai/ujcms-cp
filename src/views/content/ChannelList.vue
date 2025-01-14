@@ -275,7 +275,11 @@ const treeRootClick = () => {
         >
           <column-list name="channel">
             <el-table-column type="selection" :selectable="deletable" width="45"></el-table-column>
-            <el-table-column property="name" :label="$t('channel.name')" min-width="80" sortable="custom"></el-table-column>
+            <el-table-column property="name" :label="$t('channel.name')" min-width="80" sortable="custom">
+              <template #default="{ row }">
+                <el-link :href="row.url" target="_blank" type="primary">{{ row.name }}</el-link>
+              </template>
+            </el-table-column>
             <el-table-column property="alias" :label="$t('channel.alias')" min-width="80" sortable="custom"></el-table-column>
             <el-table-column
               property="channelModel.name"

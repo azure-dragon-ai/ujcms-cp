@@ -323,6 +323,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
           return {
             editorType: mains['text'].editorType,
             channelId: channel?.id,
+            publishDate: new Date(),
             allowComment: true,
             customs: {},
             fileList: [],

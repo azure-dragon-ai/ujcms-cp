@@ -313,7 +313,7 @@ const uploadSuccess = async () => {
           ></el-table-column>
           <el-table-column property="fileType" :label="$t('webFile.fileType')" sortable="custom" :formatter="(row) => $t(`webFile.fileType.${row.fileType}`)" min-width="100" />
           <el-table-column property="length" :label="$t('webFile.size')" sortable="custom" :formatter="(row) => (row.directory ? '' : row.size)" min-width="100" />
-          <el-table-column :label="$t('table.action')" width="220">
+          <el-table-column :label="$t('table.action')" width="260">
             <template #default="{ row }">
               <el-button type="primary" :disabled="row.directory" size="small" link @click="() => handleView(row.id, row.fileType, row.url)">
                 {{ $t('webFile.op.view') }}

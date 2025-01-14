@@ -130,7 +130,7 @@ const move = async (selected: any[], type: 'top' | 'up' | 'down' | 'bottom') => 
             <el-tag v-else type="info" size="small">{{ $t(`role.scope.${row.scope}`) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('table.action')" width="160">
+        <el-table-column :label="$t('table.action')" width="180">
           <template #default="{ row }">
             <el-button type="primary" :disabled="perm('role:update')" size="small" link @click="() => handleEdit(row.id)">{{ $t('edit') }}</el-button>
             <el-button type="primary" :disabled="perm('role:updatePermission')" size="small" link @click="() => handlePermissionEdit(row.id)">

@@ -126,7 +126,7 @@
   "article.fileList": "附件集",
   "article.fileList.attribute": "附件属性",
   "article.sticky": "置顶",
-  "article.sticky.tooltip": "0-999，越大置顶级别越高。为0则不置顶",
+  "article.sticky.tooltip": "0-999，越大置顶级别越高。为0则不置顶。设置置顶后，前台 ArticleList 标签可使用排序参数进行排序，如：orderBy='sticky_desc,order_desc'",
   "article.stickyDate": "置顶结束日期",
   "article.stickyDate.tooltip": "到期后自动取消置顶（有10分钟左右误差）。留空则永久置顶",
   "article.views": "总浏览",

@@ -46,21 +46,7 @@ const values = ref<any>({});
         <template #label><label-tip message="role.rank" help /></template>
         <el-input-number v-model.number="values.rank" :min="disabled ? 0 : currentUser.rank" :max="32767" />
       </el-form-item>
-      <el-form-item
-        prop="type"
-        :rules="[
-          { required: true, message: () => $t('v.required') },
-          {
-            validator: (rule, value, callback) => {
-              if ([1, 2, 3].includes(value) && currentUser.epRank < 1) {
-                callback($t('error.enterprise.short'));
-                return;
-              }
-              callback();
-            },
-          },
-        ]"
-      >
+      <el-form-item v-if="currentUser.epRank >= 3" prop="type" :rules="[{ required: true, message: () => $t('v.required') }]">
         <template #label><label-tip message="role.type" help /></template>
         <el-select v-model="values.type">
           <el-option v-for="item in [1, 2, 3, 4]" :key="item" :label="$t(`role.type.${item}`)" :value="item" />

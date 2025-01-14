@@ -250,7 +250,7 @@ const handleStatus = async (ids: string[], status: number) => {
                 <el-tag v-else type="danger">{{ row.status }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('table.action')" width="300">
+            <el-table-column :label="$t('table.action')" width="330">
               <template #default="{ row }">
                 <el-button type="primary" :disabled="perm('user:update')" size="small" link @click="() => handleEdit(row.id)">{{ $t('edit') }}</el-button>
                 <el-button

@@ -292,7 +292,7 @@ const treeAllowDrop = (draggingNode: any, dropNode: any) => {
                 </el-icon>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('table.action')" width="230">
+            <el-table-column :label="$t('table.action')" width="240">
               <template #default="{ row }">
                 <el-button type="primary" :disabled="perm('org:create')" size="small" link @click="() => handleAdd(row.id)">{{ $t('addChild') }}</el-button>
                 <el-button type="primary" :disabled="perm('org:update')" size="small" link @click="() => handleEdit(row.id)">{{ $t('edit') }}</el-button>
