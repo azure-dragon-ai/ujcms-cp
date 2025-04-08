@@ -158,6 +158,14 @@
   "log.survey.updateOrder": "修改调查问卷顺序",
   "log.survey.delete": "删除调查问卷",
 
+  "log.collection": "采集管理",
+  "log.collection.create": "新增采集",
+  "log.collection.update": "修改采集",
+  "log.collection.updateOrder": "修改采集顺序",
+  "log.collection.start": "开始采集",
+  "log.collection.stop": "停止采集",
+  "log.collection.delete": "删除投票",
+
   "log.example": "示例管理",
   "log.example.create": "新增示例",
   "log.example.update": "修改示例",

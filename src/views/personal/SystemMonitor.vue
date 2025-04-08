@@ -149,9 +149,9 @@ watch(visible, async () => {
             <div class="w-full mt-2 text-xs text-center">
               <div>{{ values.osName }}</div>
               <div class="mt-1">
-                {{ `${$t('systemMonitor.memoryTotal')}: ${$n(values.memoryTotal ?? 0)} MB,` }}
-                {{ `${$t('systemMonitor.memoryUsed')}: ${$n(values.memoryUsed ?? 0)} MB,` }}
-                {{ `${$t('systemMonitor.memoryAvailable')}: ${$n(values.memoryAvailable ?? 0)} MB` }}
+                {{ `${$t('systemMonitor.memoryTotal')}: ${$n(Number(values.memoryTotal ?? 10))} MB,` }}
+                {{ `${$t('systemMonitor.memoryUsed')}: ${$n(Number(values.memoryUsed ?? 10))} MB,` }}
+                {{ `${$t('systemMonitor.memoryAvailable')}: ${$n(Number(values.memoryAvailable ?? 10))} MB` }}
               </div>
             </div>
           </el-form-item>

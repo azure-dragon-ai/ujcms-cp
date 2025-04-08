@@ -9,6 +9,7 @@ export const queryChannel = async (id: string): Promise<any> => (await axios.get
 export const createChannel = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/core/channel', data)).data;
 export const updateChannel = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/core/channel?_method=put', data)).data;
 export const updateChannelNav = async (id: string, nav: boolean): Promise<any> => (await axios.post('/backend/core/channel/nav?_method=put', { id, nav })).data;
+export const updateChannelReal = async (id: string, real: boolean): Promise<any> => (await axios.post('/backend/core/channel/real?_method=put', { id, real })).data;
 export const moveChannel = async (fromId: string, toId: string, type: 'inner' | 'before' | 'after'): Promise<any> =>
   (await axios.post('/backend/core/channel/move?_method=put', { fromId, toId, type })).data;
 export const batchMoveChannel = async (fromIds: string[], toId: string, type: 'inner' | 'before' | 'after'): Promise<any> =>

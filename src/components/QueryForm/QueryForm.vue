@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useSlots, watch, provide, computed, ref, toRefs, VNode } from 'vue';
+import { useSlots, watch, provide, computed, ref, toRefs, Slots } from 'vue';
 import { Plus, Minus, Search, Refresh } from '@element-plus/icons-vue';
 import QueryInput from './QueryInput.vue';
 
 const props = defineProps({ params: { type: Object, required: true } });
 const { params } = toRefs(props);
-const slots: Record<string, (...args: any[]) => VNode[]> = useSlots();
+const slots: Readonly<Slots> = useSlots();
 provide('params', params);
 defineEmits({
   search: null,

@@ -103,6 +103,12 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/EnterprisePage.vue'),
         meta: { title: 'menu.interaction.survey', requiresPermission: 'survey:page' },
       },
+      {
+        path: 'collection',
+        name: 'CollectionList',
+        component: () => import('@/views/EnterprisePage.vue'),
+        meta: { title: 'menu.interaction.collection', requiresPermission: 'collection:page' },
+      },
       // {
       //   path: 'example',
       //   name: 'ExampleList',

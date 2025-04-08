@@ -1,4 +1,4 @@
-// pnpm run plop core user user page
+// pnpm run plop core user org page
 // pnpm run plop <子系统> <分类> <模块> <page|list>
 /* eslint-disable func-names */
 export default function (plop) {

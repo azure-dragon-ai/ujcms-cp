@@ -158,7 +158,7 @@ const fetchData = async () => {
 const fetchChannel = async () => {
   channelTreeLoading.value = true;
   try {
-    channelTreeData.value = toTree(await queryChannelList({ isArticlePermission: true }));
+    channelTreeData.value = toTree(await queryChannelList({ isArticlePermission: true, isReal: true }));
   } finally {
     channelTreeLoading.value = false;
   }

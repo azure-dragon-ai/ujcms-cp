@@ -48,16 +48,55 @@ watch(previewStyle, () => {
 watch(height, () => {
   editor.setHeight(height.value);
 });
+watch([modelValue, html], () => {
+  updateEditorValue();
+});
 
-const eventOptions: any = {};
+const createFullscreenButton = () => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'toastui-editor-toolbar-icons text-xl';
+  button.style.backgroundImage = 'none';
+  button.style.margin = '0';
+  button.innerHTML = 'F';
+  button.addEventListener('click', () => {
+    toggleFullScreen(editor, toastuiEditor.value, height.value);
+  });
+  return button;
+};
+
+const updateEditorValue = () => {
+  if (modelValue.value && modelValue.value !== editor.getMarkdown()) {
+    editor.setMarkdown(modelValue.value);
+  } else if (!modelValue.value && html.value) {
+    // markdown无值，html有值，则用设置html
+    editor.setHTML(html.value);
+    // 防止在切换编辑器时，因清空markdown值导致事件无效
+    nextTick().then(() => {
+      emit('update:modelValue', editor.getMarkdown());
+    });
+    return;
+  } else if (!modelValue.value && !html.value) {
+    // markdown无值，html无值，则清空编辑器
+    editor.setMarkdown('');
+  }
+  // 检查markdown生成的HTML和原HTML是否匹配。但是经过后台处理的HTML肯定和编辑器返回的不一样
+  const currHtml = getHTML();
+  if (modelValue.value && decodeHTML(html.value) !== currHtml) {
+    // 触发不匹配事件
+    emit('different', html.value, currHtml);
+    emit('update:html', currHtml);
+  }
+};
 
 // 内容为空时，默认生成以下HTML，应作为空串处理
 const emptyHtml = '<p><br class="ProseMirror-trailingBreak"></p>';
+const eventOptions: any = {};
 
 editorEvents.forEach((event) => {
   eventOptions[event] = (...args: any[]) => {
     if (event === 'change') {
-      const newHtml = editor.getHTML();
+      const newHtml = getHTML();
       if (newHtml !== html.value) {
         emit('update:html', newHtml !== emptyHtml ? newHtml : '');
       }
@@ -75,19 +114,6 @@ editorEvents.forEach((event) => {
   };
 });
 
-const createFullscreenButton = () => {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'toastui-editor-toolbar-icons text-xl';
-  button.style.backgroundImage = 'none';
-  button.style.margin = '0';
-  button.innerHTML = 'F';
-  button.addEventListener('click', () => {
-    toggleFullScreen(editor, toastuiEditor.value, height.value);
-  });
-  return button;
-};
-
 onMounted(() => {
   const chartOptions = {
     maxWidth: 800,
@@ -103,6 +129,7 @@ onMounted(() => {
     language: language.value,
     autofocus: false,
     usageStatistics: false,
+    useCommandShortcut: false,
     el: toastuiEditor.value,
     events: eventOptions,
     hooks: { addImageBlobHook },
@@ -124,30 +151,20 @@ onMounted(() => {
     ],
   };
   editor = new Editor(computedOptions);
-  // markdown无值，html有值，则用设置html
-  if (!modelValue.value && html.value) {
-    editor.setHTML(html.value);
-    // 防止在切换编辑器时，因清空markdown值导致事件无效
-    nextTick().then(() => {
-      emit('update:modelValue', editor.getMarkdown());
-    });
-    return;
-  }
-  // 检查markdown生成的HTML和原HTML是否匹配
-  const currHtml = editor.getHTML();
-  if (modelValue.value && decodeHTML(html.value) !== currHtml) {
-    // 触发不匹配事件
-    emit('different', html.value, currHtml);
-    emit('update:html', currHtml);
-  }
+  updateEditorValue();
 });
 onUnmounted(() => {
   editorEvents.forEach((event) => {
     editor.off(event);
   });
-  editor.destroy();
 });
-const getHTML = () => editor.getHTML();
+const getHTML = () => {
+  const html = editor.getHTML();
+  if (html != null) {
+    return html.replaceAll(/<p><br[ /]*><\/p>/gi, '');
+  }
+  return html;
+};
 const setHTML = (html: string): void => editor.setHTML(html);
 const getMarkdown = () => editor.getMarkdown();
 const setMarkdown = (markdown: string): void => editor.setMarkdown(markdown);

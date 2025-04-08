@@ -140,9 +140,11 @@ const initCustoms = (customs: any) => {
         channelModelId: bean?.channelModelId ?? parent?.channelModelId ?? channelModelList[0]?.id,
         articleModelId: bean?.articleModelId ?? parent?.articleModelId ?? articleModelList[0]?.id,
         nav: bean?.nav ?? parent?.nav ?? true,
+        book: false,
+        real: bean?.real ?? parent?.real ?? true,
         channelTemplate: bean?.channelTemplate ?? parent?.channelTemplate ?? channelTemplates[0],
         articleTemplate: bean?.articleTemplate ?? parent?.articleTemplate ?? articleTemplates[0],
-        pageSize: 20,
+        pageSize: 10,
         allowComment: bean?.allowComment ?? parent?.allowComment ?? true,
         allowContribute: bean?.allowContribute ?? parent?.allowContribute ?? true,
         allowSearch: bean?.allowSearch ?? parent?.allowSearch ?? true,
@@ -262,30 +264,28 @@ const initCustoms = (customs: any) => {
                 </el-select>
               </el-form-item>
             </el-col>
-            <template v-if="![3, 4, 5].includes(values.type)">
-              <el-col v-if="mains['channelTemplate'].show" :span="mains['channelTemplate'].double ? 12 : 24">
-                <el-form-item
-                  prop="channelTemplate"
-                  :label="mains['channelTemplate'].name ?? $t('channel.channelTemplate')"
-                  :rules="mains['channelTemplate'].required ? { required: true, message: () => $t('v.required') } : undefined"
-                >
-                  <el-select v-model="values.channelTemplate" class="w-full">
-                    <el-option v-for="item in channelTemplates" :key="item" :label="item + '.html'" :value="item"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col v-if="mains['articleTemplate'].show" :span="mains['articleTemplate'].double ? 12 : 24">
-                <el-form-item
-                  prop="articleTemplate"
-                  :label="mains['articleTemplate'].name ?? $t('channel.articleTemplate')"
-                  :rules="mains['articleTemplate'].required ? { required: true, message: () => $t('v.required') } : undefined"
-                >
-                  <el-select v-model="values.articleTemplate" class="w-full">
-                    <el-option v-for="item in articleTemplates" :key="item" :label="item + '.html'" :value="item"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-            </template>
+            <el-col v-if="mains['channelTemplate'].show" :span="mains['channelTemplate'].double ? 12 : 24">
+              <el-form-item
+                prop="channelTemplate"
+                :label="mains['channelTemplate'].name ?? $t('channel.channelTemplate')"
+                :rules="mains['channelTemplate'].required ? { required: true, message: () => $t('v.required') } : undefined"
+              >
+                <el-select v-model="values.channelTemplate" class="w-full">
+                  <el-option v-for="item in channelTemplates" :key="item" :label="item + '.html'" :value="item"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="mains['articleTemplate'].show" :span="mains['articleTemplate'].double ? 12 : 24">
+              <el-form-item
+                prop="articleTemplate"
+                :label="mains['articleTemplate'].name ?? $t('channel.articleTemplate')"
+                :rules="mains['articleTemplate'].required ? { required: true, message: () => $t('v.required') } : undefined"
+              >
+                <el-select v-model="values.articleTemplate" class="w-full">
+                  <el-option v-for="item in articleTemplates" :key="item" :label="item + '.html'" :value="item"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
             <!--
             <el-col v-if="mains['allowComment'].show" :span="mains['allowComment'].double ? 12 : 24">
               <el-form-item
@@ -312,10 +312,22 @@ const initCustoms = (customs: any) => {
                 <el-switch v-model="values.nav"></el-switch>
               </el-form-item>
             </el-col>
+            <el-col v-if="mains['real'].show" :span="mains['real'].double ? 12 : 24">
+              <el-form-item prop="real" :rules="mains['real'].required ? { required: true, message: () => $t('v.required') } : undefined">
+                <template #label><label-tip :label="mains['real'].name ?? $t('channel.real')" message="channel.real" help /></template>
+                <el-switch v-model="values.real"></el-switch>
+              </el-form-item>
+            </el-col>
             <el-col v-if="mains['allowSearch'].show" :span="mains['allowSearch'].double ? 12 : 24">
               <el-form-item prop="allowSearch" :rules="mains['allowSearch'].required ? { required: true, message: () => $t('v.required') } : undefined">
                 <template #label><label-tip :label="mains['allowSearch'].name ?? $t('channel.allowSearch')" message="channel.allowSearch" help /></template>
                 <el-switch v-model="values.allowSearch"></el-switch>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="mains['book'].show" :span="mains['book'].double ? 12 : 24">
+              <el-form-item prop="book" :rules="mains['book'].required ? { required: true, message: () => $t('v.required') } : undefined">
+                <template #label><label-tip :label="mains['book'].name ?? $t('channel.book')" message="channel.book" help /></template>
+                <el-switch v-model="values.book"></el-switch>
               </el-form-item>
             </el-col>
             <template v-for="field in fields" :key="field.code">
@@ -385,6 +397,16 @@ const initCustoms = (customs: any) => {
                 <el-select v-model="values.performanceTypeId" clearable class="w-full">
                   <el-option v-for="item in performanceTypeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
+              </el-form-item>
+              <el-form-item
+                v-if="asides['channelStaticPath'].show"
+                prop="channelStaticPath"
+                :label="asides['channelStaticPath'].name ?? $t('channel.channelStaticPath')"
+                :rules="asides['channelStaticPath'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                label-position="top"
+              >
+                <template #label><label-tip :label="asides['channelStaticPath'].name ?? $t('channel.channelStaticPath')" message="channel.channelStaticPath" help /></template>
+                <el-input v-model="values.channelStaticPath" maxlength="100"><template #append>.html</template></el-input>
               </el-form-item>
               <el-form-item
                 prop="pageSize"

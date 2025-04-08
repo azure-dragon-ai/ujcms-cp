@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, toRefs, watch, PropType } from 'vue';
+import { computed, ref, toRefs, watch, onMounted, PropType } from 'vue';
 import { Finished, Box, DocumentRemove, Delete, CircleCheck, CircleClose, View, Back, SetUp, Compass } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 import * as htmlparser2 from 'htmlparser2';
@@ -78,7 +78,7 @@ const flatChannelList = ref<any[]>([]);
 const articleModelList = ref<any[]>([]);
 const articleTemplates = ref<any[]>([]);
 const articleModelId = ref<string>();
-const articleModel = computed(() => articleModelList.value.find((item) => item.id === articleModelId.value));
+const articleModel = computed(() => articleModelList.value.find((item) => item.id === articleModelId.value) ?? articleModelList.value[0]);
 const mains = computed(() => arr2obj(mergeModelFields(getModelData().article.mains, articleModel.value?.mains, 'article')));
 const asides = computed(() => arr2obj(mergeModelFields(getModelData().article.asides, articleModel.value?.asides, 'article')));
 const fields = computed(() => JSON.parse(articleModel.value?.customs || '[]').filter((item: any) => item.type !== 'tinyEditor'));
@@ -92,12 +92,16 @@ const tagRemoteMethod = async (query?: string) => {
   tagLoading.value = false;
 };
 
+onMounted(() => {
+  // 提前获取，否则新增文章时 ${mains['text'].editorType} 无法取到值
+  fetchArticleModeList();
+});
+
 watch(visible, () => {
   if (visible.value) {
     articleModelId.value = channel?.value?.articleModelId;
     fetchOrgList();
     fetchChannelList();
-    fetchArticleModeList();
     fetchArticleTemplates();
     fetchJodConverterEnabled();
   }
@@ -120,15 +124,11 @@ const fetchOrgList = async () => {
   }
 };
 const fetchChannelList = async () => {
-  flatChannelList.value = await queryChannelList({ isArticlePermission: true });
+  flatChannelList.value = await queryChannelList({ isArticlePermission: true, isReal: true });
   channelList.value = toTree(flatChannelList.value);
 };
 const fetchArticleModeList = async () => {
   articleModelList.value = await queryModelList({ type: 'article' });
-  // 如果 articleModelId 无值，则默认赋予第一个模型的值
-  if (articleModelId.value == null && articleModelList.value.length > 0) {
-    articleModelId.value = articleModelList.value[0].id;
-  }
 };
 const fetchArticleTemplates = async () => {
   articleTemplates.value = await queryArticleTemplates();
@@ -210,6 +210,12 @@ const backVisible = ref<boolean>(false);
 const delegateVisible = ref<boolean>(false);
 const transferVisible = ref<boolean>(false);
 
+const editorSave = async (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key === 's') {
+    event.preventDefault();
+    dialog.value.defaultSubmit(true);
+  }
+};
 const handlePass = async (bean: any) => {
   taskId.value = bean.taskId;
   formProperties.value = await queryTaskFormProperties(bean.taskId);
@@ -755,8 +761,21 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                     <div v-if="currentUser.epRank === 0 && currentUser.epDisplay" class="inline-flex mb-1">
                       <el-button type="primary" @click="() => $alert($t('error.enterprise'), { dangerouslyUseHTMLString: true })">{{ $t('article.op.docImport') }}</el-button>
                     </div>
-                    <tui-editor v-if="values.editorType === 2" v-model="values.markdown" v-model:html="values.text" class="leading-6" />
-                    <tinymce v-else ref="tinyText" v-model="values.text" :disabled="disabled" :init="{ typesetting_options: currentSiteStore.currentSite.editor?.typesetting }" />
+                    <tui-editor
+                      v-if="values.editorType === 2"
+                      v-model="values.markdown"
+                      v-model:html="values.text"
+                      class="leading-6"
+                      @keydown="(editorType, event) => editorSave(event)"
+                    />
+                    <tinymce
+                      v-else
+                      ref="tinyText"
+                      v-model="values.text"
+                      :disabled="disabled"
+                      :init="{ typesetting_options: currentSiteStore.currentSite.editor?.typesetting }"
+                      @keydown="editorSave"
+                    />
                   </div>
                 </el-form-item>
               </el-col>
@@ -883,6 +902,16 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
                   <el-select v-model="values.articleTemplate" clearable class="w-full">
                     <el-option v-for="item in articleTemplates" :key="item" :label="item + '.html'" :value="item"></el-option>
                   </el-select>
+                </el-form-item>
+                <el-form-item
+                  v-if="asides['articleStaticPath'].show"
+                  prop="articleStaticPath"
+                  :label="asides['articleStaticPath'].name ?? $t('article.articleStaticPath')"
+                  :rules="asides['articleStaticPath'].required ? { required: true, message: () => $t('v.required') } : undefined"
+                  label-position="top"
+                >
+                  <template #label><label-tip :label="asides['articleStaticPath'].name ?? $t('article.articleStaticPath')" message="article.articleStaticPath" help /></template>
+                  <el-input v-model="values.articleStaticPath" maxlength="100"><template #append>.html</template></el-input>
                 </el-form-item>
                 <!--
                 <el-form-item

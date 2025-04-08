@@ -147,7 +147,7 @@ const handleDelete = async () => {
 const resetOrigValues = () => {
   origValues.value = props.toValues(values.value);
 };
-const handleSubmit = async () => {
+const handleSubmit = async (stay = false) => {
   await props.beforeValidate?.(values.value);
   form.value.validate(async (valid: boolean) => {
     if (!valid) return;
@@ -167,7 +167,7 @@ const handleSubmit = async () => {
         form.value.resetFields();
       }
       ElMessage.success(t('success'));
-      if (!continuous.value) emit('update:modelValue', false);
+      if (!continuous.value && !stay) emit('update:modelValue', false);
       emit('finished', bean.value);
     } finally {
       buttonLoading.value = false;
@@ -178,7 +178,7 @@ const submit = (
   executor: (
     values: any,
     payload: { isEdit: boolean; continuous: boolean; form: any; props: any; focus: any; loadBean: () => Promise<any>; resetOrigValues: () => void; emit: any },
-  ) => Promise<any>,
+  ) => Promise<boolean | undefined>,
 ) => {
   form.value.validate(async (valid: boolean) => {
     if (!valid) return;
@@ -189,9 +189,18 @@ const submit = (
       }
       emit('beforeSubmit', values.value);
 
-      await executor(values.value, { isEdit: isEdit.value, continuous: continuous.value, form: form.value, props, focus: focus.value, loadBean, resetOrigValues, emit });
+      const stay = await executor(values.value, {
+        isEdit: isEdit.value,
+        continuous: continuous.value,
+        form: form.value,
+        props,
+        focus: focus.value,
+        loadBean,
+        resetOrigValues,
+        emit,
+      });
 
-      if (!continuous.value) emit('update:modelValue', false);
+      if (!continuous.value && !stay) emit('update:modelValue', false);
       emit('finished', bean.value);
     } finally {
       buttonLoading.value = false;
@@ -222,7 +231,7 @@ const remove = async (
     buttonLoading.value = false;
   }
 };
-defineExpose({ form, submit, remove });
+defineExpose({ form, submit, remove, defaultSubmit: handleSubmit });
 </script>
 
 <template>

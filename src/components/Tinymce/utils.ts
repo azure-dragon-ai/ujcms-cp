@@ -105,8 +105,11 @@ const bindModelHandlers = (props: any, ctx: SetupContext, editor: any, modelValu
     });
   });
 
-  editor.on('blur', (e: any) => {
-    ctx.emit('blur', e);
+  editor.on('blur', (event: any) => {
+    ctx.emit('blur', event);
+  });
+  editor.on('keydown', (event: any) => {
+    ctx.emit('keydown', event);
   });
 };
 

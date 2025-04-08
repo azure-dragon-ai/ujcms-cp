@@ -31,6 +31,7 @@ const second = ref<string>(secondName);
       type="daterange"
       :start-placeholder="$t('begin.date')"
       :end-placeholder="$t('end.date')"
+      :editable="false"
       class="w-96"
     ></el-date-picker>
     <el-date-picker
@@ -39,6 +40,7 @@ const second = ref<string>(secondName);
       type="datetimerange"
       :start-placeholder="$t('begin.date')"
       :end-placeholder="$t('end.date')"
+      :editable="false"
       class="w-96"
     >
     </el-date-picker>

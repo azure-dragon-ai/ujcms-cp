@@ -8,7 +8,7 @@ import Sortable from 'sortablejs';
 import { perm, currentUser, hasPermission } from '@/stores/useCurrentUser';
 import { toParams, resetParams } from '@/utils/common';
 import { toTree, flatTree } from '@/utils/tree';
-import { deleteChannel, queryChannelList, queryChannelPermissions, updateChannelNav, moveChannel, tidyTreeChannel } from '@/api/content';
+import { deleteChannel, queryChannelList, queryChannelPermissions, updateChannelNav, updateChannelReal, moveChannel, tidyTreeChannel } from '@/api/content';
 import { queryProcessDefinitionList } from '@/api/system';
 import { ColumnList, ColumnSetting } from '@/components/TableList';
 import { QueryForm, QueryItem } from '@/components/QueryForm';
@@ -168,6 +168,13 @@ const handleUpdateNav = (id: string, nav: boolean) => {
   updateChannelNav(id, nav);
   ElMessage.success(t('success'));
 };
+const handleUpdateReal = (id: string, real: boolean) => {
+  if (!hasPermission('channel:update')) {
+    return;
+  }
+  updateChannelReal(id, real);
+  ElMessage.success(t('success'));
+};
 const handleDelete = async (ids: string[]) => {
   await deleteChannel(ids);
   fetchData();
@@ -296,6 +303,11 @@ const treeRootClick = () => {
             <el-table-column property="nav" :label="$t('channel.nav')" min-width="50">
               <template #default="{ row }">
                 <el-switch v-model="row.nav" size="small" :disabled="perm('channel:update')" @click="() => handleUpdateNav(row.id, row.nav)" />
+              </template>
+            </el-table-column>
+            <el-table-column property="real" :label="$t('channel.real')" min-width="50">
+              <template #default="{ row }">
+                <el-switch v-model="row.real" size="small" :disabled="perm('channel:update')" @click="() => handleUpdateReal(row.id, row.real)" />
               </template>
             </el-table-column>
             <el-table-column property="id" label="ID" width="170" sortable="custom"></el-table-column>

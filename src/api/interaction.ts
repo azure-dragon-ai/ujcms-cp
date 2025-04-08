@@ -32,3 +32,37 @@ export const queryExample = async (id: string): Promise<any> => (await axios.get
 export const createExample = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/example', data)).data;
 export const updateExample = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/example?_method=put', data)).data;
 export const deleteExample = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/example?_method=delete', data)).data;
+
+export const queryCollectionPage = async (params?: Record<string, any>): Promise<any> => (await axios.get('/backend/ext/collection', { params })).data;
+export const queryCollection = async (id: string): Promise<any> => (await axios.get(`/backend/ext/collection/${id}`)).data;
+export const createCollection = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/collection', data)).data;
+export const updateCollection = async (data: Record<string, any>): Promise<any> => (await axios.post('/backend/ext/collection?_method=put', data)).data;
+export const updateCollectionOrder = async (fromId: string, toId: string): Promise<any> => (await axios.post('/backend/ext/collection/update-order', { fromId, toId })).data;
+export const deleteCollection = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/collection?_method=delete', data)).data;
+export const startCollection = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/collection/start?_method=put', data)).data;
+export const pauseCollection = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/collection/pause?_method=put', data)).data;
+export const stopCollection = async (data: string[]): Promise<any> => (await axios.post('/backend/ext/collection/stop?_method=put', data)).data;
+export const collectionSetupListUrls = async (listUrls: string, pageBegin: number, pageEnd: number, listDesc: boolean): Promise<any> =>
+  (await axios.get(`/backend/ext/collection/setup/list-urls`, { params: { listUrls, pageBegin, pageEnd, listDesc } })).data;
+export const collectionSetupDetailUrls = async (
+  listUrls: string,
+  pageBegin: number,
+  pageEnd: number,
+  userAgent: string,
+  charset: string,
+  listAreaPattern: string,
+  itemUrlPattern: string,
+  itemUrlReg: boolean,
+  itemUrlJs: boolean,
+): Promise<any> =>
+  (
+    await axios.get(`/backend/ext/collection/setup/detail-urls`, {
+      params: { listUrls, pageBegin, pageEnd, userAgent, charset, listAreaPattern, itemUrlPattern, itemUrlReg, itemUrlJs },
+    })
+  ).data;
+export const collectionSetupFetchContent = async (url: string, userAgent: string, charset: string): Promise<any> =>
+  (await axios.get(`/backend/ext/collection/setup/fetch-content`, { params: { url, userAgent, charset } })).data;
+export const collectionSetupMatch = async (text: string, texts: string[] | undefined, pattern: string, multi?: boolean, reg?: boolean, js?: boolean): Promise<any> =>
+  (await axios.post(`/backend/ext/collection/setup/match?_method=put`, { text, texts, pattern, multi, reg, js })).data;
+export const collectionSetupFilter = async (text: string, texts: string[] | undefined, filter: string, multi?: boolean): Promise<any> =>
+  (await axios.post(`/backend/ext/collection/setup/filter?_method=put`, { text, texts, filter, multi })).data;

@@ -74,7 +74,7 @@ export default defineComponent({
       validator: (prop: string) => prop === 'html' || prop === 'text',
     },
   },
-  emits: ['update:modelValue', 'input', 'change', 'blur'],
+  emits: ['update:modelValue', 'input', 'change', 'blur', 'keydown'],
   setup(props, ctx) {
     const { disabled, modelValue } = toRefs(props);
     const { t } = useI18n();
@@ -267,7 +267,7 @@ export default defineComponent({
         inline: inlineEditor,
         setup: (editor: any) => {
           vueEditor.value = editor;
-          editor.on('init', (e: Event) => initEditor(e, props, ctx, editor, modelValue, formItem));
+          editor.on('init', (event: Event) => initEditor(event, props, ctx, editor, modelValue, formItem));
           if (props.init && typeof props.init.setup === 'function') {
             props.init.setup(editor);
           }

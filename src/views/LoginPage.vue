@@ -168,7 +168,7 @@ const handleLogin = () => {
       </div>
     </el-form>
     <div v-if="envMode === 'staging'" class="mt-5 text-sm text-center text-gray-secondary">
-      <p>为避免数据被删改，演示用户登录后只拥有浏览后台功能，操作数据会显示无权访问（403）。</p>
+      <p>为避免数据被删改，演示用户登录后只拥有浏览后台功能，操作数据会显示无权访问（403）</p>
     </div>
     <change-password v-model="changePasswordVisible" />
     <get-short-message v-model="getShortMessageVisible" @finish="finishGetShortMessage" />
