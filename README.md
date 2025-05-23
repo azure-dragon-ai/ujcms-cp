@@ -30,6 +30,10 @@ UJCMS-CP是UJCMS的后台前端项目。使用 Vue 3、Vite、TypeScript、Eleme
 * 编译后的程序在`/dist`目录。
 * 将`/dist`目录里的文件拷贝至主项目UJCMS的`/src/main/webapp/cp`目录下（先将原目录下的文件删除）。
 
+## 常见错误
+
+编译时出现 `Javascript Heap out of memory` 错误，代表内存溢出。可以设置 `NODE_OPTIONS` 环境变量为 `--max-old-space-size=8192`。
+
 ## 前后端分开部署
 
 通常前端和后端程序部署到同一个应用，即将前端程序复制到主项目UJCMS的`/cp`目录。以演示站点为例，后端接口地址为`https://demo.ujcms.com/api`,前端访问地址则为`https://demo.ujcms.com/cp/`。这样可以避免跨域问题，是最简单的部署方式。
