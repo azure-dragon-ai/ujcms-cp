@@ -93,9 +93,9 @@ const updateEditorValue = () => {
 const emptyHtml = '<p><br class="ProseMirror-trailingBreak"></p>';
 const eventOptions: any = {};
 
-editorEvents.forEach((event) => {
-  eventOptions[event] = (...args: any[]) => {
-    if (event === 'change') {
+editorEvents.forEach((eventName: string) => {
+  eventOptions[eventName] = (...args: any[]) => {
+    if (eventName === 'change') {
       const newHtml = getHTML();
       if (newHtml !== html.value) {
         emit('update:html', newHtml !== emptyHtml ? newHtml : '');
@@ -109,8 +109,20 @@ editorEvents.forEach((event) => {
           console.warn(err);
         }
       });
+    } else if (eventName === 'keydown') {
+      // 第一个参数为 editorType，第二个参数为事件对象
+      const event = args[1];
+      if (event.ctrlKey && !event.shiftKey && event.key.toLowerCase() === 'z') {
+        event.preventDefault();
+        event.stopPropagation();
+        editor.exec('undo');
+      } else if ((event.ctrlKey && event.key.toLowerCase() === 'y') || (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'z')) {
+        event.preventDefault();
+        event.stopPropagation();
+        editor.exec('redo');
+      }
     }
-    emit(event, ...args);
+    emit(eventName, ...args);
   };
 });
 

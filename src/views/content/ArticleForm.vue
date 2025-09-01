@@ -211,8 +211,9 @@ const delegateVisible = ref<boolean>(false);
 const transferVisible = ref<boolean>(false);
 
 const editorSave = async (event: KeyboardEvent) => {
-  if (event.ctrlKey && event.key === 's') {
+  if (event.ctrlKey && event.key.toLowerCase() === 's') {
     event.preventDefault();
+    event.stopPropagation();
     dialog.value.defaultSubmit(true);
   }
 };
@@ -331,7 +332,7 @@ const titleSimilarity = async (title: string, excludeId?: string) => {
             channelId: channel?.id,
             publishDate: new Date(),
             allowComment: true,
-            customs: {},
+            customs: initCustoms({}),
             fileList: [],
             imageList: [],
           };

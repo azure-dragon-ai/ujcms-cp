@@ -71,7 +71,13 @@ const changeAssignee = (assignee: string) => {
 
 const checkOrgs = (_: any, { checkedKeys }: { checkedKeys: string[] }) => {
   const modeling = props.modeler.get('modeling');
+  console.log('repropertyOrgIds', propertyOrgIds.value);
   modeling.updateProperties(props.selection, { candidateGroups: [...propertyRoleIds.value, ...checkedKeys].join(',') });
+};
+const removeOrgs = () => {
+  const modeling = props.modeler.get('modeling');
+  console.log('repropertyOrgIds', propertyOrgIds.value);
+  modeling.updateProperties(props.selection, { candidateGroups: [...propertyRoleIds.value, ...propertyOrgIds.value].join(',') });
 };
 </script>
 
@@ -101,6 +107,7 @@ const checkOrgs = (_: any, { checkedKeys }: { checkedKeys: string[] }) => {
           check-on-click-node
           class="w-full"
           @check="checkOrgs"
+          @remove-tag="removeOrgs"
         />
       </el-form-item>
       <el-form-item v-if="currentUser.epRank >= 3">

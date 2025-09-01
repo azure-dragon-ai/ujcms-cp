@@ -95,7 +95,7 @@ export function getPermsTreeData(): any[] {
         {
           label: t('menu.content.channel'),
           key: 'channel.key',
-          perms: ['channel:page', 'channel:list', 'processModel:list', 'model:list'],
+          perms: ['channel:page', 'channel:list', 'processModel:list', 'processDefinition:list', 'dict:list', 'performanceType:list', 'model:list'],
           children: [
             { label: t('list'), key: 'channel:page' },
             { label: t('add'), key: 'channel:create', perms: ['channel:create'] },
@@ -140,7 +140,7 @@ export function getPermsTreeData(): any[] {
         {
           label: t('menu.content.form'),
           key: 'form.key',
-          perms: ['form:page', 'form:list'],
+          perms: ['form:page', 'form:list', 'formType:list', 'dict:list', 'model:list', 'processInstance:task'],
           children: [
             { label: t('list'), key: 'form:page' },
             { label: t('add'), key: 'form:create', perms: ['form:create'] },
@@ -197,7 +197,7 @@ export function getPermsTreeData(): any[] {
         {
           label: t('menu.interaction.messageBoard'),
           key: 'messageBoard.key',
-          perms: ['messageBoard:page', 'messageBoard:list'],
+          perms: ['messageBoard:page', 'messageBoard:list', 'messageBoardType:list'],
           children: [
             { label: t('list'), key: 'messageBoard:page' },
             { label: t('add'), key: 'messageBoard:create', perms: ['messageBoard:create'] },

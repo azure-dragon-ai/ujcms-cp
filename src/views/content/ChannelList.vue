@@ -275,7 +275,7 @@ const treeRootClick = () => {
           row-key="id"
           default-expand-all
           :data="data"
-          :row-class-name="({ row }) => (row.children?.length > 0 ? undefined : 'drag-draggable')"
+          :row-class-name="({ row }) => (row.children?.length > 0 ? '' : 'drag-draggable')"
           @selection-change="(rows) => (selection = rows)"
           @row-dblclick="(row) => handleEdit(row.id)"
           @sort-change="handleSort"
@@ -302,12 +302,12 @@ const treeRootClick = () => {
             </el-table-column>
             <el-table-column property="nav" :label="$t('channel.nav')" min-width="50">
               <template #default="{ row }">
-                <el-switch v-model="row.nav" size="small" :disabled="perm('channel:update')" @click="() => handleUpdateNav(row.id, row.nav)" />
+                <el-switch v-model="row.nav" size="small" :disabled="perm('channel:update') || !deletable(row)" @click="() => handleUpdateNav(row.id, row.nav)" />
               </template>
             </el-table-column>
             <el-table-column property="real" :label="$t('channel.real')" min-width="50">
               <template #default="{ row }">
-                <el-switch v-model="row.real" size="small" :disabled="perm('channel:update')" @click="() => handleUpdateReal(row.id, row.real)" />
+                <el-switch v-model="row.real" size="small" :disabled="perm('channel:update') || !deletable(row)" @click="() => handleUpdateReal(row.id, row.real)" />
               </template>
             </el-table-column>
             <el-table-column property="id" label="ID" width="170" sortable="custom"></el-table-column>

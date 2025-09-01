@@ -103,6 +103,8 @@ export default defineComponent({
         // 设置编辑器默认字体
         content_style: 'body { font-size: 14px; }',
         menubar: false,
+        // 工具栏模式，默认 'floating'，超出一行的工具栏会隐藏，点击 '...' 按钮展开。设置为 'warp' 则全部显示。
+        // toolbar_mode: 'wrap',
         plugins:
           'advlist autoresize autosave charmap code codesample directionality fullscreen hr image imagetools lists link media pagebreak paste preview quickbars ' +
           `searchreplace table visualblocks visualchars indent2em ${ep2 ? 'typesetting' : ''}`,
@@ -115,6 +117,7 @@ export default defineComponent({
         font_formats:
           '宋体=SimSun; 微软雅黑=Microsoft YaHei; 楷体=SimKai,KaiTi; 黑体=SimHei; 隶书=SimLi,LiSu; Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;' +
           'Arial Black=arial black,avant garde;Comic Sans MS=comic sans ms,sans-serif;Helvetica=helvetica;Impact=impact,chicago;Times New Roman=times new roman,times',
+        fontsize_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px 64px 72px 96px',
         quickbars_selection_toolbar: 'bold italic | h2 h3 blockquote | link',
         quickbars_insert_toolbar: false,
         paste_data_images: true,

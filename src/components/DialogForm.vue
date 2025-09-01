@@ -239,6 +239,7 @@ defineExpose({ form, submit, remove, defaultSubmit: handleSubmit });
     :title="title"
     :close-on-click-modal="!unsaved"
     :model-value="modelValue"
+    :close-on-press-escape="!unsaved"
     :width="large ? '98%' : '768px'"
     :top="large ? '16px' : '8vh'"
     @update:model-value="(event) => $emit('update:modelValue', event)"
