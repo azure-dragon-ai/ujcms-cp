@@ -20,6 +20,10 @@ const getBeginByDateRange = (range: string): string | undefined => {
       return dayjs().startOf('day').subtract(6, 'day').format();
     case 'last30day':
       return dayjs().startOf('day').subtract(29, 'day').format();
+    case 'last3month':
+      return dayjs().startOf('day').subtract(3, 'month').format();
+    case 'last6month':
+      return dayjs().startOf('day').subtract(6, 'month').format();
     case 'lastYear':
       return dayjs().startOf('day').subtract(1, 'year').format();
     default:
@@ -91,7 +95,7 @@ onMounted(async () => {
     <div class="p-3 mt-3 app-block">
       <div>
         <el-radio-group v-model="dateRange" @change="(value: any) => initTrendChart(value)">
-          <el-radio-button v-for="item in ['now', 'today', 'yesterday', 'last7day', 'last30day', 'lastYear', 'all']" :key="item" :value="item">
+          <el-radio-button v-for="item in ['today', 'yesterday', 'last7day', 'last30day', 'last3month', 'last6month', 'lastYear', 'all']" :key="item" :value="item">
             {{ $t(`visit.${item}`) }}
           </el-radio-button>
         </el-radio-group>

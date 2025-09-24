@@ -213,26 +213,24 @@ const initCustoms = (customs: any) => {
                 </el-input>
               </el-form-item>
             </el-col>
-            <template v-if="values.type < 3">
-              <el-col v-if="mains['seoTitle'].show" :span="mains['seoTitle'].double ? 12 : 24">
-                <el-form-item prop="seoTitle" :rules="mains['seoTitle'].required ? { required: true, message: () => $t('v.required') } : undefined">
-                  <template #label><label-tip :label="mains['seoTitle'].name ?? $t('channel.seoTitle')" message="channel.seoTitle" help /></template>
-                  <el-input v-model="values.seoTitle" maxlength="150"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col v-if="mains['seoKeywords'].show" :span="mains['seoKeywords'].double ? 12 : 24">
-                <el-form-item prop="seoKeywords" :rules="mains['seoKeywords'].required ? { required: true, message: () => $t('v.required') } : undefined">
-                  <template #label><label-tip :label="mains['seoKeywords'].name ?? $t('channel.seoKeywords')" message="channel.seoKeywords" help /></template>
-                  <el-input v-model="values.seoKeywords" maxlength="150"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col v-if="mains['seoDescription'].show" :span="mains['seoDescription'].double ? 12 : 24">
-                <el-form-item prop="seoDescription" :rules="mains['seoDescription'].required ? { required: true, message: () => $t('v.required') } : undefined">
-                  <template #label><label-tip :label="mains['seoDescription'].name ?? $t('channel.seoDescription')" message="channel.seoDescription" help /></template>
-                  <el-input v-model="values.seoDescription" maxlength="1000"></el-input>
-                </el-form-item>
-              </el-col>
-            </template>
+            <el-col v-if="mains['seoTitle'].show" :span="mains['seoTitle'].double ? 12 : 24">
+              <el-form-item prop="seoTitle" :rules="mains['seoTitle'].required ? { required: true, message: () => $t('v.required') } : undefined">
+                <template #label><label-tip :label="mains['seoTitle'].name ?? $t('channel.seoTitle')" message="channel.seoTitle" help /></template>
+                <el-input v-model="values.seoTitle" maxlength="150"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="mains['seoKeywords'].show" :span="mains['seoKeywords'].double ? 12 : 24">
+              <el-form-item prop="seoKeywords" :rules="mains['seoKeywords'].required ? { required: true, message: () => $t('v.required') } : undefined">
+                <template #label><label-tip :label="mains['seoKeywords'].name ?? $t('channel.seoKeywords')" message="channel.seoKeywords" help /></template>
+                <el-input v-model="values.seoKeywords" maxlength="150"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="mains['seoDescription'].show" :span="mains['seoDescription'].double ? 12 : 24">
+              <el-form-item prop="seoDescription" :rules="mains['seoDescription'].required ? { required: true, message: () => $t('v.required') } : undefined">
+                <template #label><label-tip :label="mains['seoDescription'].name ?? $t('channel.seoDescription')" message="channel.seoDescription" help /></template>
+                <el-input v-model="values.seoDescription" maxlength="1000"></el-input>
+              </el-form-item>
+            </el-col>
             <el-col v-if="mains['image'].show" :span="mains['image'].double ? 12 : 24">
               <el-form-item
                 prop="image"

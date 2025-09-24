@@ -1,5 +1,6 @@
 import { imageUploadUrl } from '@/api/config';
 import { getAuthHeaders } from '@/utils/auth';
+import { getSiteHeaders } from '@/utils/common';
 import Editor from '@toast-ui/editor';
 
 /**
@@ -38,6 +39,7 @@ export const toggleFullScreen = (editor: Editor, element: HTMLElement, height: s
 export const addImageBlobHook = (blob: Blob | File, callback: any): void => {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', imageUploadUrl);
+  Object.entries(getSiteHeaders()).forEach(([key, value]: any) => xhr.setRequestHeader(key, value));
 
   // xhr.upload.onprogress = (e) => {
   //   (e.loaded / e.total) * 100;

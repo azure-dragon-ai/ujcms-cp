@@ -3,6 +3,7 @@ import { defineComponent, ref, toRefs, watch, onMounted, onBeforeUnmount, onActi
 import { useI18n } from 'vue-i18n';
 import { useFormItem } from 'element-plus';
 import { getAuthHeaders } from '@/utils/auth';
+import { getSiteHeaders } from '@/utils/common';
 import { currentUser } from '@/stores/useCurrentUser';
 import { useSysConfigStore } from '@/stores/sysConfigStore';
 import { imageUploadUrl, fileUploadUrl, mediaUploadUrl, fetchImage } from '@/api/config';
@@ -173,6 +174,7 @@ export default defineComponent({
           formData.append('isWatermark', 'true');
 
           Object.entries(getAuthHeaders()).forEach(([key, value]: any) => xhr.setRequestHeader(key, value));
+          Object.entries(getSiteHeaders()).forEach(([key, value]: any) => xhr.setRequestHeader(key, value));
           xhr.send(formData);
         },
 
