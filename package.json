@@ -1,6 +1,6 @@
 {
   "name": "ujcms-cp",
-  "version": "9.9.3",
+  "version": "9.10.0",
   "private": true,
   "type": "module",
   "scripts": {
