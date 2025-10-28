@@ -14,8 +14,8 @@ UJCMS-CP是UJCMS的后台前端项目。使用 Vue 3、Vite、TypeScript、Eleme
 * 使用淘宝 npm 镜像。执行：pnpm set registry https://registry.npmmirror.com/
 * 安装依赖。执行：pnpm install
 * 启动程序。执行：pnpm run dev
-* 访问：http://localhost:9520
-* 用户名：admin，密码：password。
+* 访问：http://127.0.0.1:9520
+* 用户名：admin，密码：password
 
 ## 修改后台标识
 
