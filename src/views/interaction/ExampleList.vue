@@ -29,7 +29,10 @@ const beanIds = computed(() => data.value.map((row) => row.id));
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryExamplePage({ ...toParams(params.value), Q_OrderBy: sort.value, page: currentPage.value, pageSize: pageSize.value });
+    const {
+      content,
+      page: { totalElements },
+    } = await queryExamplePage({ ...toParams(params.value), Q_OrderBy: sort.value, page: currentPage.value, pageSize: pageSize.value });
     data.value = content;
     total.value = Number(totalElements);
   } finally {

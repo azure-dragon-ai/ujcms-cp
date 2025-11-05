@@ -31,7 +31,10 @@ const isSorted = ref<boolean>(false);
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryVotePage({ ...toParams(params.value), Q_OrderBy: sort.value, page: currentPage.value, pageSize: pageSize.value });
+    const {
+      content,
+      page: { totalElements },
+    } = await queryVotePage({ ...toParams(params.value), Q_OrderBy: sort.value, page: currentPage.value, pageSize: pageSize.value });
     data.value = content;
     total.value = Number(totalElements);
     isSorted.value = sort.value !== undefined;

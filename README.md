@@ -9,12 +9,12 @@ UJCMS-CP是UJCMS的后台前端项目。使用 Vue 3、Vite、TypeScript、Eleme
 ## 搭建步骤
 
 * 使用 vscode 开发工具。
-* 安装 node 环境。Node 18+ 版本。
+* 安装 node 环境。Node 20.12+ 版本。
 * 安装 pnpm。执行：npm install -g pnpm
 * 使用淘宝 npm 镜像。执行：pnpm set registry https://registry.npmmirror.com/
 * 安装依赖。执行：pnpm install
 * 启动程序。执行：pnpm run dev
-* 访问：http://127.0.0.1:9520
+* 访问：http://127.0.0.1:5173
 * 用户名：admin，密码：password
 
 ## 修改后台标识

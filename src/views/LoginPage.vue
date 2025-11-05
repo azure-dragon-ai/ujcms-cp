@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect, nextTick } from 'vue';
 import { LocationQueryValue, useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { User, Lock, Picture, Cellphone } from '@element-plus/icons-vue';
+
 import { sm2Encrypt } from '@/utils/sm';
 import { removeAccessToken, removeRefreshToken } from '@/utils/auth';
 import { queryClientPublicKey, queryIsDisplayCaptcha, queryIsMfaLogin, queryCaptcha, tryCaptcha } from '@/api/login';
@@ -38,8 +39,6 @@ removeRefreshToken();
 
 if (envMode === 'development') {
   bean.value = { username: 'admin', password: 'password' };
-} else if (envMode === 'staging') {
-  bean.value = { username: 'demo', password: '123' };
 }
 
 const fetchCaptcha = async () => {
@@ -64,6 +63,7 @@ onMounted(async () => {
   focus.value.select();
   fetchIsDisplayCaptcha();
   fetchIsMfaLogin();
+  
 });
 
 watchEffect(() => {
@@ -106,7 +106,7 @@ const handleLogin = () => {
         router.push(redirect.value);
       } else {
         // 从 403 页面跳转到登录页面时，使用 router.push 会继续回到 403 页面，可能是页面缓存所致
-        window.location.reload();
+        location.reload();
       }
     } finally {
       buttonLoading.value = false;
@@ -162,7 +162,10 @@ const handleLogin = () => {
           </template>
         </el-input>
       </el-form-item>
-      <el-button type="primary" native-type="submit" class="w-full" :loading="buttonLoading" @click.prevent="handleLogin">{{ $t('login') }}</el-button>
+      <div>
+        <el-button type="primary" native-type="submit" class="w-full" :loading="buttonLoading" @click.prevent="handleLogin">{{ $t('login') }}</el-button>
+      </div>
+      
       <div class="mt-2 text-right">
         <el-button type="primary" link @click="() => (changePasswordVisible = true)">{{ $t('changePassword') }}</el-button>
       </div>

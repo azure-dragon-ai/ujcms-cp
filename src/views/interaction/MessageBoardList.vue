@@ -34,7 +34,10 @@ const status = ref<number>(Number(route.query.status ?? '-1'));
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryMessageBoardPage({
+    const {
+      content,
+      page: { totalElements },
+    } = await queryMessageBoardPage({
       ...toParams(params.value),
       Q_EQ_status_Short: status.value !== -1 ? status.value : undefined,
       Q_OrderBy: sort.value,

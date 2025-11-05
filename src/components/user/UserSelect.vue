@@ -16,7 +16,10 @@ const data = ref<any[]>([]);
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryUserPage({
+    const {
+      content,
+      page: { totalElements },
+    } = await queryUserPage({
       Q_Contains_1_username: name.value,
       Q_Contains_1_realName: name.value,
       current: true,

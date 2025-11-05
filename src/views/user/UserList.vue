@@ -53,7 +53,10 @@ const fetchOrg = async () => {
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryUserPage({
+    const {
+      content,
+      page: { totalElements },
+    } = await queryUserPage({
       ...toParams(params.value),
       orgId: org.value?.id,
       current: !showGlobalData.value,

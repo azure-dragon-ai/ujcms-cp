@@ -140,7 +140,10 @@ const handleExecute = async (action: string, ids: string[]) => {
 const fetchData = async () => {
   tableLoading.value = true;
   try {
-    const { content, totalElements } = await queryArticlePage({
+    const {
+      content,
+      page: { totalElements },
+    } = await queryArticlePage({
       ...toParams(params.value),
       Q_EQ_status_Short: status.value !== -1 ? status.value : undefined,
       subChannelId: channel.value?.id,

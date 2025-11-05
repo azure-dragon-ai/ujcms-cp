@@ -35,7 +35,10 @@ const fetchOrg = async () => {
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { content, totalElements } = await queryUserPage({
+    const {
+      content,
+      page: { totalElements },
+    } = await queryUserPage({
       Q_Contains_1_username: name.value,
       Q_Contains_1_realName: name.value,
       Q_NotIn_id_Long: userData.value.map((item) => item.id).join(','),
